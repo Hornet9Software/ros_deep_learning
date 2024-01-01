@@ -1,0 +1,39 @@
+<launch>
+	<arg name="input_width" default="640"/>
+	<arg name="input_height" default="480"/>
+	<arg name="input_codec" default="unknown"/>
+	<arg name="input_loop" default="0"/>
+	<arg name="input_latency" default="2000"/>
+	<arg name="input_framerate" default="20.0"/>
+	
+	<node namespace="left" pkg="ros_deep_learning" exec="video_source" output="screen">
+		<param name="resource" value="v4l2:///dev/video0"/>
+		<param name="width" value="$(var input_width)"/>
+		<param name="height" value="$(var input_height)"/>
+		<param name="codec" value="$(var input_codec)"/>
+		<param name="loop" value="$(var input_loop)"/>
+		<param name="latency" value="$(var input_latency)"/>
+		<param name="framerate" value="$(var input_framerate)"/>
+	</node>
+    
+    <node namespace="right" pkg="ros_deep_learning" exec="video_source" output="screen">
+		<param name="resource" value="v4l2:///dev/video2"/>
+		<param name="width" value="$(var input_width)"/>
+		<param name="height" value="$(var input_height)"/>
+		<param name="codec" value="$(var input_codec)"/>
+		<param name="loop" value="$(var input_loop)"/>
+		<param name="latency" value="$(var input_latency)"/>
+		<param name="framerate" value="$(var input_framerate)"/>
+	</node>
+
+    <node namespace="bottom" pkg="ros_deep_learning" exec="video_source" output="screen">
+		<param name="resource" value="v4l2:///dev/video4"/>
+		<param name="width" value="$(var input_width)"/>
+		<param name="height" value="$(var input_height)"/>
+		<param name="codec" value="$(var input_codec)"/>
+		<param name="loop" value="$(var input_loop)"/>
+		<param name="latency" value="$(var input_latency)"/>
+		<param name="framerate" value="$(var input_framerate)"/>
+	</node>
+
+</launch>
